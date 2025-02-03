@@ -3,18 +3,11 @@
 
 # Imports
 import numpy as np
-import numpy.ma as ma
 import xarray as xr
 import matplotlib.pyplot as plt
-import scipy
-from scipy.interpolate import griddata
-import cmocean
 from matplotlib import colors
-import glidertools as gt
-from datetime import datetime, timedelta
+from datetime import datetime
 import pandas as pd
-from matplotlib.dates import DateFormatter
-from osufilter import osufilter
 import woa_temp
 import woa_salt
 import transects_func
@@ -1086,7 +1079,6 @@ transect_times = {
     'tran_12_24':np.array([datetime(2024,12,15).toordinal()]),   # For cutoff values
     'tran_1_25':np.array([datetime(2025,1,15).toordinal()]),   # For cutoff values
     'tran_2_25':np.array([datetime(2025,2,15).toordinal()]),   # For cutoff values
-
 }
 
 
@@ -1206,7 +1198,6 @@ transects_temp = {
     '12_24': t_anom_11_24,   # Repeating for cutoff values
     '1_25': t_anom_11_24,   # Repeating for cutoff values
     '2_25': t_anom_11_24,   # Repeating for cutoff values
-
 }
 
 combined_temp_data = []
@@ -1215,13 +1206,13 @@ for transect, array in transects_temp.items():
     transects_temp[transect] = np.mean(array, axis=1)   # Creates a profile of the mean values across depth
 
 for transect, array in transects_temp.items():
-    transects_temp[transect] = xr.DataArray(array)   # Converts the numpy array to an xarray data array for the next step
+    transects_temp[transect] = xr.DataArray(array)   # Converts the numpy array to an xarray DataArray for the next step
     
 for (transect, array), (transect_time, time) in zip(transects_temp.items(), transect_times.items()):
-    transects_temp[transect] = array.expand_dims(time=time)   # Adds the time point from transect_times to the data array
+    transects_temp[transect] = array.expand_dims(time=time)   # Adds the time point from transect_times to the DataArray
 
 for transect, array in transects_temp.items():
-    combined_temp_data.append(array)   # Appends the data array to the list: combined_temp_data
+    combined_temp_data.append(array)   # Appends the DataArray to the list: combined_temp_data
 
 combined_temp = xr.concat(combined_temp_data, dim='time')   # Concatenates all of the data together
 
