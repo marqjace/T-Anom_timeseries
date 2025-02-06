@@ -121,105 +121,6 @@ xgrid2 = np.linspace(xmin2, xmax2, xn2)
 ygrid2 = np.linspace(ymin2, ymax2, yn2)
 Xgrid2, Ygrid2 = np.meshgrid(xgrid2, ygrid2)
 
-
-# # Template for Opening & Merging Individual Dives
-
-# # Open 
-# filenames = 'C:/Users/marqjace/TH_line/deployments/oct_2024/transect2/p266*.nc'
-
-# gt.load.seaglider_show_variables(filenames)
-
-# names = [
-#     'ctd_depth',
-#     'ctd_time',
-#     'ctd_pressure',
-#     'salinity',
-#     'temperature',
-#     # 'aanderaa4831_dissolved_oxygen',
-#     # 'aanderaa4330_dissolved_oxygen',
-#     # 'sbe43_dissolved_oxygen'
-# ]
-
-# ds_dict = gt.load.seaglider_basestation_netCDFs(
-#     filenames, names,
-#     return_merged=True,
-#     keep_global_attrs=False
-# )
-
-# print(ds_dict.keys())
-
-# ctd_data_point = ds_dict['ctd_data_point']
-
-# dat = ctd_data_point.rename({
-#     'salinity': 'salt_raw',
-#     'temperature': 'temp_raw',
-#     'ctd_pressure': 'pressure',
-#     'ctd_depth': 'depth',
-#     'ctd_time': 'time_raw',
-#     # 'aanderaa4831_dissolved_oxygen': 'oxygen',
-#     # 'aanderaa4330_dissolved_oxygen': 'oxygen',
-#     # 'sbe43_dissolved_oxygen': 'oxygen'
-# })
-
-# print(dat)
-
-# dat.to_netcdf('C:/Users/marqjace/TH_line/deployments/oct_2024/transect2/11_24_merged.nc')
-
-
-
-##################### Below is incorrect #####################
-
-
-
-# names = [
-#     'ctd_depth',
-#     'ctd_time',
-#     'ctd_pressure',
-#     'salinity',
-#     'temperature'
-# ]
-
-# names2 = [
-#     'aanderaa4831_dissolved_oxygen'
-# ]
-
-# ds_dict = gt.load.seaglider_basestation_netCDFs(
-#     filenames, names,
-#     return_merged=True,
-#     keep_global_attrs=False
-# )
-
-# print(ds_dict.keys())
-
-# ds_dict2 = gt.load.seaglider_basestation_netCDFs(
-#     filenames, names2,
-#     return_merged=True,
-#     keep_global_attrs=False
-# )
-
-# print(ds_dict2.keys())
-
-# ctd_data_point = ds_dict['ctd_data_point']
-
-# ctd_data_point, aa4831_data_point = ds_dict['ctd_data_point'], ds_dict2['aa4831_data_point']
-
-# dat = ctd_data_point.rename({
-#     'salinity': 'salt_raw',
-#     'temperature': 'temp_raw',
-#     'ctd_pressure': 'pressure',
-#     'ctd_depth': 'depth',
-#     'ctd_time': 'time_raw'
-# })
-
-# dat2 = aa4831_data_point.rename({
-#     'aanderaa4831_dissolved_oxygen': 'oxygen',
-# })
-
-# print(dat)
-# print(dat2)
-
-# # dat2.to_netcdf('C:/Users/marqjace/TH_line/deployments/apr_2019/transect4/8_19_merged_oxy.nc')
-
 # Interpolated & Gridded Temperature
 temp_12_14_a = transects_func.temp_12_14_a
 temp_12_14_b = transects_func.temp_12_14_b
@@ -1645,6 +1546,7 @@ cbar2.outline.set_linewidth(2)
 cbar2.set_label(label=r'(PSU)', rotation=0, labelpad=10)
 plt.tight_layout()
 plt.savefig(r'C:\Users\marqjace\seaglider_python\Figures\current_t_anom_timeseries.png')
+plt.show()
 
 
 # Plot the figure: Grid
@@ -1753,7 +1655,7 @@ labs = [l.get_label() for l in lns]
 ax.legend(lns, labs, loc=2, frameon=False, fontsize='x-large', labelcolor='linecolor')
 plt.axvspan(datetime(2006,6,1).toordinal(), datetime(2025,1,1).toordinal(), ymin=0, ymax=0.35, alpha=0.15, color='gray')
 plt.savefig(r'C:\Users\marqjace\seaglider_python\Figures\current_t_anom_indices_MOCI.png')
-
+plt.show()
 
 # Plot the figure: Temperature Anomaly Indices
 fig, ax = plt.subplots(1,1, figsize=(18,7), dpi=300)
@@ -1787,7 +1689,7 @@ labs = [l.get_label() for l in lns]
 ax.legend(lns, labs, loc=2, frameon=False, fontsize='x-large', labelcolor='linecolor')
 plt.axvspan(datetime(2006,6,1).toordinal(), datetime(2025,1,1).toordinal(), ymin=0, ymax=0.35, alpha=0.15, color='gray')
 plt.savefig(r'C:\Users\marqjace\seaglider_python\Figures\current_t_anom_indices.png')
-
+plt.show()
 
 # # Hovmoller Diagram
 
